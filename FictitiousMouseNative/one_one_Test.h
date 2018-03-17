@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT void JNICALL Java_one_one_Test_sayHello
   (JNIEnv *, jobject, jstring);
 
+/*
+ * Class:     one_one_Test
+ * Method:    accessField
+ * Signature: (Lone/one/A;)V
+ */
+JNIEXPORT void JNICALL Java_one_one_Test_accessField
+  (JNIEnv *, jobject, jobject);
+
 #ifdef __cplusplus
 }
 #endif
