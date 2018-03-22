@@ -1,6 +1,5 @@
 package com.mmotiy.service;
 
-import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -10,19 +9,19 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.mmotiy.dto.TagINPUT;
-import com.mmotiy.util.FileHander;
 
 public class Mouse {
 	static final private Logger logger = LoggerFactory.getLogger(Mouse.class);
 	
 	static {
-		try {
+		System.load("D:\\Mouse.dll");
+		/*try {
 			String path = FileHander.find(System.getProperties().get("user.dir").toString(), "Mouse.dll").getCanonicalPath();
 			System.load(path);
 			logger.debug("加载dll文件:{}",path);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	private ThreadPoolExecutor executor ;
@@ -44,7 +43,7 @@ public class Mouse {
 		this.executor = executor;
 	}
 	public Mouse() {
-		this.executor =  new ThreadPoolExecutor(10, 10, 3, TimeUnit.MINUTES, new ArrayBlockingQueue<>(100));
+		this.executor =  new ThreadPoolExecutor(10, 10, 300, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(100));
 	}
 	
 	public void mouse(TagINPUT input) {
@@ -52,4 +51,5 @@ public class Mouse {
 
 	}
 	static public native void sendInput(TagINPUT input);
+	
 }
